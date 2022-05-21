@@ -31,10 +31,17 @@ class Player {
   }
 
   update() {
-    this.position.y += this.velocity.y;
     this.draw();
+    this.position.y += this.velocity.y;
   }
 }
 
 const player = new Player();
 player.update();
+
+function animate() {
+  requestAnimationFrame(animate); // for this this functin is a recursive function
+  player.update();
+}
+
+animate();
