@@ -3,8 +3,8 @@ import platform from "../../img/platform.png";
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+canvas.width = 1024;
+canvas.height = 576;
 
 const gravity = 0.5;
 
@@ -72,11 +72,11 @@ image.src = platform;
 const player = new Player();
 const platforms = [
   new Platform({
-    x: 200,
-    y: 100,
+    x: -1,
+    y: 470,
     image: image,
   }),
-  new Platform({ x: 500, y: 200, image }),
+  new Platform({ x: image.width - 3, y: 470, image }),
 ];
 
 const keys = {
@@ -91,8 +91,9 @@ const keys = {
 let scrollOffset = 0;
 
 function animate() {
-  requestAnimationFrame(animate); // for this this functin is a recursive function
-  c.clearRect(0, 0, canvas.width, canvas.height);
+  requestAnimationFrame(animate);
+  c.fillStyle = "white";
+  c.fillRect(0, 0, canvas.width, canvas.height);
 
   platforms.forEach((platform) => {
     platform.draw();

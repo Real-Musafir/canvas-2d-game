@@ -118,8 +118,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var canvas = document.querySelector("canvas");
 var c = canvas.getContext("2d");
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+canvas.width = 1024;
+canvas.height = 576;
 var gravity = 0.5;
 
 var Player = /*#__PURE__*/function () {
@@ -195,12 +195,12 @@ var image = new Image();
 image.src = _img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"];
 var player = new Player();
 var platforms = [new Platform({
-  x: 200,
-  y: 100,
+  x: -1,
+  y: 470,
   image: image
 }), new Platform({
-  x: 500,
-  y: 200,
+  x: image.width - 3,
+  y: 470,
   image: image
 })];
 var keys = {
@@ -214,9 +214,9 @@ var keys = {
 var scrollOffset = 0;
 
 function animate() {
-  requestAnimationFrame(animate); // for this this functin is a recursive function
-
-  c.clearRect(0, 0, canvas.width, canvas.height);
+  requestAnimationFrame(animate);
+  c.fillStyle = "white";
+  c.fillRect(0, 0, canvas.width, canvas.height);
   platforms.forEach(function (platform) {
     platform.draw();
   });
