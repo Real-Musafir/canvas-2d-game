@@ -41,6 +41,7 @@ player.update();
 
 function animate() {
   requestAnimationFrame(animate); // for this this functin is a recursive function
+  c.clearRect(0, 0, canvas.width, canvas.height);
   player.update();
 }
 
