@@ -29,7 +29,12 @@ class Player {
                 this.height
             );
   }
+
+  update() {
+    this.position.y += this.velocity.y;
+    this.draw();
+  }
 }
 
 const player = new Player();
-player.draw();
+player.update();
