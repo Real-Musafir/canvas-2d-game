@@ -78,12 +78,19 @@ function animate() {
   c.clearRect(0, 0, canvas.width, canvas.height);
   player.update();
   platform.draw();
-  if (keys.right.pressed) {
+  if (keys.right.pressed && player.position.x < 400) {
     player.velocity.x = 5;
-  } else if (keys.left.pressed) {
+  } else if (keys.left.pressed && player.position.x > 100) {
     player.velocity.x = -5;
   } else {
     player.velocity.x = 0;
+
+    if (keys.right.pressed) {
+      platform.position.x -= 5;
+    }
+    if (keys.left.pressed) {
+      platform.position.x += 5;
+    }
   }
 
   // platform collision detection
