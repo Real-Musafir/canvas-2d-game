@@ -47,29 +47,36 @@ class Player {
 }
 
 class Platform {
-  constructor({ x, y }) {
+  constructor({ x, y, image }) {
     this.position = {
       x,
       y,
     };
 
-    this.width = 200;
-    this.height = 20;
+    this.image = image;
+    this.width = image.width;
+    this.height = image.height;
   }
 
   draw() {
-    c.fillStyle = "blue";
-    c.fillRect(this.position.x, this.position.y, this.width, this.height);
+    c.drawImage(this.image, this.position.x, this.position.y);
+
+    // c.fillStyle = "blue";
+    // c.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 }
+
+const image = new Image();
+image.src = platform;
 
 const player = new Player();
 const platforms = [
   new Platform({
     x: 200,
     y: 100,
+    image: image,
   }),
-  new Platform({ x: 500, y: 200 }),
+  new Platform({ x: 500, y: 200, image }),
 ];
 
 const keys = {
@@ -86,10 +93,12 @@ let scrollOffset = 0;
 function animate() {
   requestAnimationFrame(animate); // for this this functin is a recursive function
   c.clearRect(0, 0, canvas.width, canvas.height);
-  player.update();
+
   platforms.forEach((platform) => {
     platform.draw();
   });
+
+  player.update();
 
   if (keys.right.pressed && player.position.x < 400) {
     player.velocity.x = 5;
