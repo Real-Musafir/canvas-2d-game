@@ -79,6 +79,8 @@ const keys = {
   },
 };
 
+let scrollOffset = 0;
+
 function animate() {
   requestAnimationFrame(animate); // for this this functin is a recursive function
   c.clearRect(0, 0, canvas.width, canvas.height);
@@ -95,11 +97,13 @@ function animate() {
     player.velocity.x = 0;
 
     if (keys.right.pressed) {
+      scrollOffset += 5;
       platforms.forEach((platform) => {
         platform.position.x -= 5;
       });
     }
     if (keys.left.pressed) {
+      scrollOffset -= 5;
       platforms.forEach((platform) => {
         platform.position.x += 5;
       });
@@ -118,6 +122,10 @@ function animate() {
       player.velocity.y = 0;
     }
   });
+
+  if (scrollOffset > 2000) {
+    console.log("You Win");
+  }
 }
 
 animate();
