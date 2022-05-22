@@ -1,6 +1,7 @@
 import platform from "../../img/platform.png";
 import hills from "../../img/hills.png";
 import background from "../../img/background.png";
+import platformSmallTall from "../../img/platformSmallTall.png";
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
@@ -94,39 +95,11 @@ function createImage(imageSrc) {
 }
 
 let platformImage = createImage(platform);
+let platformSmallTallImage = createImage(platformSmallTall);
 
 let player = new Player();
-let platforms = [
-  new Platform({
-    x: -1,
-    y: 470,
-    image: platformImage,
-  }),
-  new Platform({
-    x: platformImage.width - 3,
-    y: 470,
-    image: platformImage,
-  }),
-
-  new Platform({
-    x: platformImage.width * 2 + 100,
-    y: 470,
-    image: platformImage,
-  }),
-];
-
-let genericObjects = [
-  new GenericObject({
-    x: -1,
-    y: -1,
-    image: createImage(background),
-  }),
-  new GenericObject({
-    x: -1,
-    y: -1,
-    image: createImage(hills),
-  }),
-];
+let platforms = [];
+let genericObjects = [];
 
 const keys = {
   right: {
@@ -145,6 +118,16 @@ function init() {
   player = new Player();
   platforms = [
     new Platform({
+      x:
+        platformImage.width * 4 +
+        300 -
+        2 +
+        platformImage.width -
+        platformSmallTallImage.width,
+      y: 270,
+      image: platformSmallTallImage,
+    }),
+    new Platform({
       x: -1,
       y: 470,
       image: platformImage,
@@ -160,8 +143,22 @@ function init() {
       y: 470,
       image: platformImage,
     }),
+    new Platform({
+      x: platformImage.width * 3 + 300,
+      y: 470,
+      image: platformImage,
+    }),
+    new Platform({
+      x: platformImage.width * 4 + 300 - 2,
+      y: 470,
+      image: platformImage,
+    }),
+    new Platform({
+      x: platformImage.width * 5 + 700 - 2,
+      y: 470,
+      image: platformImage,
+    }),
   ];
-
   genericObjects = [
     new GenericObject({
       x: -1,
@@ -177,6 +174,8 @@ function init() {
 
   scrollOffset = 0;
 }
+
+init();
 
 function animate() {
   requestAnimationFrame(animate);
@@ -284,7 +283,6 @@ addEventListener("keyup", ({ keyCode }) => {
       break;
     case 87:
       console.log("up");
-      player.velocity.y -= 1;
       break;
     default:
       break;
