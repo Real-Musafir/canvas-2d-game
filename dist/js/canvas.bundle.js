@@ -184,8 +184,6 @@ var Player = /*#__PURE__*/function () {
 
       if (this.position.y + this.height + this.velocity.y <= canvas.height) {
         this.velocity.y += gravity;
-      } else {
-        this.velocity.y = 0;
       }
     }
   }]);
@@ -265,6 +263,10 @@ var platforms = [new Platform({
   x: platformImage.width - 3,
   y: 470,
   image: platformImage
+}), new Platform({
+  x: platformImage.width * 2 + 100,
+  y: 470,
+  image: platformImage
 })];
 var genericObjects = [new GenericObject({
   x: -1,
@@ -284,6 +286,34 @@ var keys = {
   }
 };
 var scrollOffset = 0;
+
+function init() {
+  platformImage = createImage(_img_platform_png__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  player = new Player();
+  platforms = [new Platform({
+    x: -1,
+    y: 470,
+    image: platformImage
+  }), new Platform({
+    x: platformImage.width - 3,
+    y: 470,
+    image: platformImage
+  }), new Platform({
+    x: platformImage.width * 2 + 100,
+    y: 470,
+    image: platformImage
+  })];
+  genericObjects = [new GenericObject({
+    x: -1,
+    y: -1,
+    image: createImage(_img_background_png__WEBPACK_IMPORTED_MODULE_2__["default"])
+  }), new GenericObject({
+    x: -1,
+    y: -1,
+    image: createImage(_img_hills_png__WEBPACK_IMPORTED_MODULE_1__["default"])
+  })];
+  scrollOffset = 0;
+}
 
 function animate() {
   requestAnimationFrame(animate);
@@ -330,10 +360,15 @@ function animate() {
     if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
       player.velocity.y = 0;
     }
-  });
+  }); // win condition
 
   if (scrollOffset > 2000) {
     console.log("You Win");
+  } // lose condition
+
+
+  if (player.position.y > canvas.height) {
+    init();
   }
 }
 
@@ -358,7 +393,7 @@ addEventListener("keydown", function (_ref3) {
 
     case 87:
       console.log("up");
-      player.velocity.y -= 20;
+      player.velocity.y -= 15;
       break;
 
     default:
@@ -387,7 +422,7 @@ addEventListener("keyup", function (_ref4) {
 
     case 87:
       console.log("up");
-      player.velocity.y -= 20;
+      player.velocity.y -= 1;
       break;
 
     default:
