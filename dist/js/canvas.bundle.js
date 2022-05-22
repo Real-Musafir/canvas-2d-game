@@ -517,6 +517,9 @@ addEventListener("keyup", function (_ref4) {
     case 68:
       console.log("right");
       keys.right.pressed = false;
+      player.currentSprite = player.sprites.stand.right;
+      player.currentCropWidth = player.sprites.stand.cropWidth;
+      player.width = player.sprites.stand.width;
       break;
 
     case 87:
