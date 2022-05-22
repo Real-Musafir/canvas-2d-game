@@ -377,7 +377,7 @@ function animate() {
     }
   }); // win condition
 
-  if (scrollOffset > 2000) {
+  if (scrollOffset > platformImage.width * 5 - 1200) {
     console.log("You Win");
   } // lose condition
 
