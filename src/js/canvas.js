@@ -116,6 +116,11 @@ const genericObjects = [
     y: -1,
     image: createImage(background),
   }),
+  new GenericObject({
+    x: -1,
+    y: -1,
+    image: createImage(hills),
+  }),
 ];
 
 const keys = {
@@ -156,11 +161,17 @@ function animate() {
       platforms.forEach((platform) => {
         platform.position.x -= 5;
       });
+      genericObjects.forEach((genericObject) => {
+        genericObject.position.x -= 3;
+      });
     }
     if (keys.left.pressed) {
       scrollOffset -= 5;
       platforms.forEach((platform) => {
         platform.position.x += 5;
+      });
+      genericObjects.forEach((genericObject) => {
+        genericObject.position.x += 3;
       });
     }
   }

@@ -270,6 +270,10 @@ var genericObjects = [new GenericObject({
   x: -1,
   y: -1,
   image: createImage(_img_background_png__WEBPACK_IMPORTED_MODULE_2__["default"])
+}), new GenericObject({
+  x: -1,
+  y: -1,
+  image: createImage(_img_hills_png__WEBPACK_IMPORTED_MODULE_1__["default"])
 })];
 var keys = {
   right: {
@@ -305,12 +309,18 @@ function animate() {
       platforms.forEach(function (platform) {
         platform.position.x -= 5;
       });
+      genericObjects.forEach(function (genericObject) {
+        genericObject.position.x -= 3;
+      });
     }
 
     if (keys.left.pressed) {
       scrollOffset -= 5;
       platforms.forEach(function (platform) {
         platform.position.x += 5;
+      });
+      genericObjects.forEach(function (genericObject) {
+        genericObject.position.x += 3;
       });
     }
   } // platform collision detection
