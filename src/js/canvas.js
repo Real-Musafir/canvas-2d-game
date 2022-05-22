@@ -1,4 +1,6 @@
 import platform from "../../img/platform.png";
+import hills from "../../img/hills.png";
+import background from "../../img/background.png";
 
 const canvas = document.querySelector("canvas");
 const c = canvas.getContext("2d");
@@ -66,17 +68,54 @@ class Platform {
   }
 }
 
-const image = new Image();
-image.src = platform;
+class GenericObject {
+  constructor({ x, y, image }) {
+    this.position = {
+      x,
+      y,
+    };
+
+    this.image = image;
+    this.width = image.width;
+    this.height = image.height;
+  }
+
+  draw() {
+    c.drawImage(this.image, this.position.x, this.position.y);
+
+    // c.fillStyle = "blue";
+    // c.fillRect(this.position.x, this.position.y, this.width, this.height);
+  }
+}
+
+function createImage(imageSrc) {
+  const image = new Image();
+  image.src = imageSrc;
+  return image;
+}
+
+const platformImage = createImage(platform);
 
 const player = new Player();
 const platforms = [
   new Platform({
     x: -1,
     y: 470,
-    image: image,
+    image: platformImage,
   }),
-  new Platform({ x: image.width - 3, y: 470, image }),
+  new Platform({
+    x: platformImage.width - 3,
+    y: 470,
+    image: platformImage,
+  }),
+];
+
+const genericObjects = [
+  new GenericObject({
+    x: -1,
+    y: -1,
+    image: createImage(background),
+  }),
 ];
 
 const keys = {
@@ -94,6 +133,10 @@ function animate() {
   requestAnimationFrame(animate);
   c.fillStyle = "white";
   c.fillRect(0, 0, canvas.width, canvas.height);
+
+  genericObjects.forEach((genericObject) => {
+    genericObject.draw();
+  });
 
   platforms.forEach((platform) => {
     platform.draw();
